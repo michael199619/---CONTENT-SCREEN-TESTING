@@ -23,9 +23,11 @@ export class ParserService {
 
         this.fork.on('exit', () => this.onModuleInit());
         this.fork.on('message', (args) => this.save(args));
+
+        this.parse('http://google.com')
     }
 
-    @Cron('0 1 0 0')
+    @Cron('* * * * *')
     private async run() {
         const domains = await this.dRepo.find({
             relations: ['resources']
